@@ -1,8 +1,8 @@
 import streamlit as st
 import os
 
-img_path = "demo\image.jpg"
-video_path = "demo\\video.webm"
+img_path = "./demo/image.jpg"
+video_path = "./demo/video.webm"
 
 st.title("A Crowd Counting Application.")
 

@@ -1,10 +1,5 @@
 import streamlit as st
 
-import os
-
-import numpy as np
-from PIL import Image
-
 from face_detection import process_uploaded_file
 
 mode = st.sidebar.selectbox("Select Input type", options=["Image", "Video"])
