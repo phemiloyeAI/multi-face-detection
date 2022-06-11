@@ -10,7 +10,7 @@ st.sidebar.write("---")
 st.sidebar.write("IoU Threshold")
 iou_thresh = st.sidebar.slider("Intersection over Union value", min_value=0, max_value=100, value=50)
 
-model_weights = "weights\yolov5-blazeface.pt"
+model_weights = "./weights/weights.pt"
 device = "cpu"
 output_path = "out_image.jpg" if mode == "Image" else "out_video.webm"
 

@@ -8,6 +8,7 @@ from norfair import Detection, Tracker, Paths, Video
 
 import torch
 
+import streamlit as st
 from stqdm import stqdm
 
 from models.experimental import attempt_load
@@ -18,11 +19,16 @@ from utils.general import check_img_size, non_max_suppression_face, scale_coords
 class FaceDetection:
 
     def __init__(self, weights, conf_thresh, iou_thresh, device, output_dir):
-        self.model = attempt_load(weights, device)
+        self.model = self.load_model(weights, device)
         self.conf_thresh = conf_thresh
         self.iou_thresh = iou_thresh
         self.device = device
         self.output_dir = output_dir
+    
+    @st.cache
+    def load_model(self, weights, device):
+        model = attempt_load(weights, device)
+        return model
 
     def frame_preprocessing(self, frame):
         frame_size = 800
