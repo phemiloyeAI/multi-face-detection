@@ -209,8 +209,8 @@ def command_line_args():
     return args
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
  
-    args = command_line_args()
+#     args = command_line_args()
 
-    process_uploaded_file(args.weights, args.input, args.conf_thresh, args.iou_thresh, args.device, args.output)
+#     process_uploaded_file(args.weights, args.input, args.conf_thresh, args.iou_thresh, args.device, args.output)
