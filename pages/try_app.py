@@ -1,7 +1,7 @@
 import streamlit as st
 
 import os
-import tempfile
+
 import numpy as np
 from PIL import Image
 
