@@ -20,9 +20,8 @@ iou_thresh = iou_thresh / 100
 if mode == "Image":
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
     if uploaded_file is not None:
-        file_name = str(uploaded_file.name)
         with st.spinner("Processing image progress"):
-            process_uploaded_file(model_weights, file_name, conf_thresh, iou_thresh, device, output_path)
+            process_uploaded_file(model_weights, uploaded_file.name, conf_thresh, iou_thresh, device, output_path)
             st.image(output_path)
 
         with open(output_path, "rb") as file:

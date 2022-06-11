@@ -167,7 +167,7 @@ def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, 
 
         inc = 1
         disp_frame = False
- 
+     
         for _ in stqdm(range(length)):
             success, frame = cap.read()
             if not success:
@@ -177,7 +177,6 @@ def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, 
                 norfair_detections = get_norfair_detections(dets)
                 tracked_objects = tracker.update(detections=norfair_detections)
                     
-                # norfair.draw_boxes(frame, norfair_detections, line_color=(255, 0, 0), line_width=1)
                 norfair.draw_tracked_objects(frame, tracked_objects, id_size=0.3, id_thickness=1, radius=0)
                 path_drawer.draw(frame, tracked_objects)
                 
