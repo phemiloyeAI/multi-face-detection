@@ -14,7 +14,7 @@ pip install -r requiremnts.txt
 python face_detection.py --weights weights\weights.pt --input demo\selfie.jpg --output results.jpg
 ```
 ### Result
-![alt Image](demo\image.jpg)
+![Image](https://github.com/Roc4t-Team/crowd-counting-application/blob/main/demo/image.jpg)
 
 ### References
 [https://github.com/deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
