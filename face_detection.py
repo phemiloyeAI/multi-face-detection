@@ -18,12 +18,13 @@ from utils.general import check_img_size, non_max_suppression_face, scale_coords
 
 class FaceDetection:
 
-    def __init__(self, weights, conf_thresh, iou_thresh, device, output_dir):
+    def __init__(self, weights, conf_thresh, iou_thresh, device, output_dir, blur):
         self.model = self.load_model(weights, device)
         self.conf_thresh = conf_thresh
         self.iou_thresh = iou_thresh
         self.device = device
         self.output_dir = output_dir
+        self.blur_face = blur
     
     @st.cache
     def load_model(self, weights, device):
@@ -102,14 +103,16 @@ class FaceDetection:
 
     def draw_bounding_boxes(self, img, xyxy):
         h,w, _ = img.shape
-        tl = 1 or round(0.002 * (h + w) / 2) + 1  # line/font thickness
         x1 = int(xyxy[0])
         y1 = int(xyxy[1])
         x2 = int(xyxy[2])
         y2 = int(xyxy[3])
-        roi = img[y1:y2, x1:x2]
-        blur_roi = cv2.GaussianBlur(roi, (21, 21), 30)
-        img[y1:y2, x1:x2] = blur_roi
+    
+        if self.blur_face == "Yes":
+            roi = img[y1:y2, x1:x2]
+            blur_roi = cv2.GaussianBlur(roi, (21, 21), 30)
+            img[y1:y2, x1:x2] = blur_roi
+    
         cv2.rectangle(img, (x1,y1), (x2, y2), (255,0,0), thickness=2, lineType=cv2.LINE_AA)
 
         return img
@@ -143,8 +146,8 @@ def center(points):
     return [np.mean(np.array(points), axis=0)]
 
 # Process input data
-def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, output):
-    detector = FaceDetection(weights, conf_thresh, iou_thresh, device, output)
+def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, output, blur):
+    detector = FaceDetection(weights, conf_thresh, iou_thresh, device, output, blur)
     ext = input_file.split(".")[-1].strip().lower()
     if ext in ["mp4", "webm", "avi"]:
    
