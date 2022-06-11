@@ -15,11 +15,12 @@ python face_detection.py --weights weights\weights.pt --input demo\selfie.jpg --
 ```
 ### Result
 Output video from the app
-![](demo\video.webm)
+https://user-images.githubusercontent.com/100911418/173186109-3d077ee7-e868-4fda-9365-d5f37efd8c30.mp4
 
-### Citation 
-This app is built on top of the research work done by Delong Qi and Weijun Tan and Qi Yao and Jingfeng Liu [link](https://github.com/deepcam-cn/yolov5-face)
+### References
+[https://github.com/deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
 
+***paper***
 ```
 @article{YOLO5Face,
 title = {YOLO5Face: Why Reinventing a Face Detector},
