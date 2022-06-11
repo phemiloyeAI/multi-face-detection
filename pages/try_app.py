@@ -22,10 +22,8 @@ iou_thresh = iou_thresh / 100
 if mode == "Image":
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
     if uploaded_file is not None:
-        tfile = tempfile.NamedTemporaryFile(delete=False)
-        tfile.write(uploaded_file.read())
         with st.spinner("Processing image progress"):
-            process_uploaded_file(model_weights, tfile.name, conf_thresh, iou_thresh, device, output_path, blur)
+            process_uploaded_file(model_weights, uploaded_file.name, conf_thresh, iou_thresh, device, output_path, blur)
             st.image(output_path)
 
         with open(output_path, "rb") as file:
@@ -39,12 +37,10 @@ if mode == "Image":
 if mode == "Video":
     video_file = st.file_uploader("Choose a video", type=["mp4", "webm", "mkv", "avi", "asf"])
     if video_file:
-        tfile = tempfile.NamedTemporaryFile(delete=False)
-        tfile.write(uploaded_file.read())
         if st.button("Process Video"):  
             st.write("\n")
             st.write("***Processing video progress.***")
-            process_uploaded_file(model_weights, tfile.name, conf_thresh, iou_thresh, device, output_path, blur)
+            process_uploaded_file(model_weights, uploaded_file.name, conf_thresh, iou_thresh, device, output_path, blur)
             st.video(output_path)
 
             with open(output_path, "rb") as file:
