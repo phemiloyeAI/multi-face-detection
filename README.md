@@ -14,8 +14,7 @@ pip install -r requiremnts.txt
 python face_detection.py --weights weights\weights.pt --input demo\selfie.jpg --output results.jpg
 ```
 ### Result
-Output video from the app
-https://user-images.githubusercontent.com/100911418/173186109-3d077ee7-e868-4fda-9365-d5f37efd8c30.mp4
+![Image](demo\image.jpg)
 
 ### References
 [https://github.com/deepcam-cn/yolov5-face](https://github.com/deepcam-cn/yolov5-face)
