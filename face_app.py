@@ -1,5 +1,6 @@
 from pages import home, inference, about
 from multipage import MultiPage
+import streamlit as st
 
 app = MultiPage()
 
