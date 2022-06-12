@@ -149,6 +149,7 @@ def center(points):
 def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, output, blur):
     detector = FaceDetection(weights, conf_thresh, iou_thresh, device, output, blur)
     ext = input_file.split(".")[-1].strip().lower()
+    input_file = "./"+input_file
     if ext in ["mp4", "webm", "avi"]:
    
         max_distance_between_points = 30
