@@ -1,7 +1,7 @@
 import streamlit as st
 import tempfile
 
-from detection import process_uploaded_file
+from face_detection import process_uploaded_file
 
 def app():
     mode = st.sidebar.selectbox("Select Input type", options=["Image", "Video"])
