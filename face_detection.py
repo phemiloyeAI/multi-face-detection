@@ -1,7 +1,10 @@
+import os
 import cv2
 import copy
 import argparse
+import tempfile
 import numpy as np
+from PIL import Image
 
 import norfair
 from norfair import Detection, Tracker, Paths, Video
@@ -148,10 +151,9 @@ def center(points):
 # Process input data
 def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, output, blur):
     detector = FaceDetection(weights, conf_thresh, iou_thresh, device, output, blur)
-    ext = input_file.split(".")[-1].strip().lower()
-    input_file = "./"+input_file
+    ext = input_file.name.split(".")[-1].strip().lower()
     if ext in ["mp4", "webm", "avi"]:
-   
+        
         max_distance_between_points = 30
         tracker = Tracker(
             distance_function=euclidean_distance,
@@ -160,7 +162,9 @@ def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, 
 
         path_drawer = Paths(center, attenuation=0.02, thickness=2, radius=2, color=(139,0,0))
 
-        cap = cv2.VideoCapture(input_file)
+        tfile = tempfile.NamedTemporaryFile(delete=False)
+        tfile.write(input_file.read())
+        cap = cv2.VideoCapture(tfile.name)
 
         width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
         height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
@@ -203,9 +207,10 @@ def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, 
         writer.release()
 
     if ext in ["jpg", "jpeg", "png"]:
-        image = cv2.imread(input_file)
+        image = np.array(Image.open(input_file))
+        cv2_img = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         text = "Faces Counter: "
-        detector.save_frame(image, text)
+        detector.save_frame(cv2_img, text)
 
 def command_line_args():
     parser = argparse.ArgumentParser()
