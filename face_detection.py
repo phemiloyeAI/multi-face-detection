@@ -203,6 +203,7 @@ def process_uploaded_file(weights, input_file, conf_thresh, iou_thresh, device, 
 
     if ext in ["jpg", "jpeg", "png"]:
         image = cv2.imread(input_file)
+        st.write(image)
         text = "Faces Counter: "
         detector.save_frame(image, text)
 
