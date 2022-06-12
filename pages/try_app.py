@@ -24,7 +24,7 @@ if mode == "Image":
     if uploaded_file is not None:
         with st.spinner("Processing image progress"):
             process_uploaded_file(model_weights, uploaded_file.name, conf_thresh, iou_thresh, device, output_path, blur)
-            
+            st.image(output_path)
 
         with open(output_path, "rb") as file:
             btn = st.download_button(
@@ -41,6 +41,7 @@ if mode == "Video":
             st.write("\n")
             st.write("***Processing video progress.***")
             process_uploaded_file(model_weights, video_file.name, conf_thresh, iou_thresh, device, output_path, blur)
+            st.video(output_path)
 
             with open(output_path, "rb") as file:
                 btn = st.download_button(
