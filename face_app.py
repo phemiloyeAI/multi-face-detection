@@ -1,9 +1,9 @@
 from pages import home, inference, about
 from multipage import MultiPage
+
 import streamlit as st
 
 app = MultiPage()
-
 
 # add pages
 app.add_page("home", home.app)
