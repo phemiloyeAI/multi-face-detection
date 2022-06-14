@@ -1,1 +1,1 @@
-web: sh setup.sh && streamlit run --server.port $PORT face_app.py
+web: sh setup.sh && streamlit run face_app.py
